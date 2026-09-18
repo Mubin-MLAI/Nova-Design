@@ -1,0 +1,991 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nova Design Studio</title>
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #fffaf5;
+            --bg-2: #f6f3ff;
+            --card: #ffffff;
+            --primary: #ff5da2;
+            --primary-dark: #e0488e;
+            --accent: #ffd76a;
+            --mint: #dff7d8;
+            --lavender: #e7d8ff;
+            --text: #1f2230;
+            --muted: #5e6475;
+            --line: rgba(31, 34, 48, 0.08);
+            --shadow: 0 24px 60px rgba(31, 34, 48, 0.12);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            background:
+                radial-gradient(circle at top left, rgba(255, 206, 234, 0.7), transparent 22%),
+                radial-gradient(circle at bottom right, rgba(196, 232, 255, 0.7), transparent 18%),
+                var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
+        }
+
+        img {
+            max-width: 100%;
+            display: block;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        .section {
+            padding: 110px 0;
+        }
+
+        .container {
+            position: relative;
+            z-index: 1;
+        }
+
+        .navbar {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.75);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border-bottom: 1px solid rgba(31, 34, 48, 0.05);
+        }
+
+        .navbar-brand {
+            font-size: 1.6rem;
+            font-weight: 800;
+            color: var(--text);
+            letter-spacing: -0.05em;
+        }
+
+        .brand-mark {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 38px;
+            height: 38px;
+            margin-right: 10px;
+            background: linear-gradient(135deg, var(--primary), #ffb4d3);
+            color: white;
+            border-radius: 12px;
+            box-shadow: 0 12px 24px rgba(255, 93, 162, 0.32);
+            font-size: 1.2rem;
+        }
+
+        .navbar-nav .nav-link {
+            color: var(--text);
+            font-weight: 500;
+            margin-left: 14px;
+            padding: 10px 18px;
+            border-radius: 999px;
+            transition: all 0.25s ease;
+        }
+
+        .navbar-nav .nav-link:hover,
+        .navbar-nav .nav-link:focus {
+            background: rgba(255, 93, 162, 0.08);
+            color: var(--primary-dark);
+        }
+
+        .hero {
+            position: relative;
+            padding: 120px 0 90px;
+            background: linear-gradient(135deg, rgba(255, 213, 229, 0.8), rgba(255, 255, 255, 0.45));
+        }
+
+        .hero::before,
+        .hero::after {
+            content: "";
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(10px);
+            opacity: 0.6;
+        }
+
+        .hero::before {
+            width: 240px;
+            height: 240px;
+            top: 40px;
+            right: 60px;
+            background: rgba(255, 215, 106, 0.28);
+        }
+
+        .hero::after {
+            width: 180px;
+            height: 180px;
+            bottom: 30px;
+            left: 60px;
+            background: rgba(196, 232, 255, 0.34);
+        }
+
+        .badge-pill {
+            display: inline-block;
+            background: rgba(255, 215, 106, 0.7);
+            border: 2px solid rgba(31, 34, 48, 0.18);
+            color: var(--text);
+            font-weight: 600;
+            padding: 10px 20px;
+            border-radius: 999px;
+            box-shadow: 0 10px 18px rgba(255, 215, 106, 0.2);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.8rem, 4vw, 5rem);
+            line-height: 1.04;
+            font-weight: 800;
+            letter-spacing: -0.06em;
+            margin: 20px 0 18px;
+            color: var(--text);
+        }
+
+        .hero h1 span {
+            color: var(--primary-dark);
+        }
+
+        .hero p {
+            max-width: 580px;
+            color: var(--muted);
+            font-size: 1.08rem;
+            line-height: 1.9;
+            margin-bottom: 30px;
+        }
+
+        .hero-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-bottom: 26px;
+        }
+
+        .btn-primary,
+        .btn-outline {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 54px;
+            padding: 14px 28px;
+            border-radius: 999px;
+            font-weight: 600;
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), #ff88b8);
+            border: none;
+            color: #fff;
+            box-shadow: 0 18px 30px rgba(255, 93, 162, 0.25);
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            transform: translateY(-2px);
+            box-shadow: 0 22px 34px rgba(255, 93, 162, 0.32);
+            color: #fff;
+        }
+
+        .btn-outline {
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(31, 34, 48, 0.1);
+            color: var(--text);
+        }
+
+        .btn-outline:hover,
+        .btn-outline:focus {
+            transform: translateY(-2px);
+            background: #fff;
+            color: var(--text);
+        }
+
+        .hero-metrics {
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 18px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .hero-metrics li {
+            min-width: 130px;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(31, 34, 48, 0.05);
+            border-radius: 18px;
+            padding: 16px 18px;
+            box-shadow: 0 14px 28px rgba(31, 34, 48, 0.05);
+        }
+
+        .hero-metrics strong {
+            display: block;
+            font-size: 1.5rem;
+            color: var(--text);
+            font-weight: 800;
+        }
+
+        .hero-metrics span {
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .showcase-card {
+            position: relative;
+            max-width: 520px;
+            margin-left: auto;
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(31, 34, 48, 0.06);
+            border-radius: 32px;
+            padding: 18px;
+            box-shadow: var(--shadow);
+            animation: float 4.5s ease-in-out infinite;
+        }
+
+        .showcase-card img {
+            width: 100%;
+            height: 610px;
+            object-fit: cover;
+            border-radius: 24px;
+        }
+
+        .mini-badge {
+            position: absolute;
+            top: 30px;
+            left: 30px;
+            background: rgba(255, 255, 255, 0.88);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(31, 34, 48, 0.06);
+            color: var(--text);
+            padding: 10px 16px;
+            border-radius: 999px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .floating-card {
+            position: absolute;
+            background: rgba(255, 255, 255, 0.9);
+            border: 1px solid rgba(31, 34, 48, 0.06);
+            border-radius: 20px;
+            padding: 18px 20px;
+            box-shadow: 0 18px 30px rgba(31, 34, 48, 0.1);
+            backdrop-filter: blur(8px);
+        }
+
+        .card-one {
+            left: -28px;
+            bottom: 50px;
+            width: 170px;
+            animation: drift 5s ease-in-out infinite alternate;
+        }
+
+        .card-two {
+            right: -18px;
+            top: 60px;
+            width: 170px;
+            animation: drift 6s ease-in-out infinite alternate-reverse;
+        }
+
+        .floating-card strong {
+            display: block;
+            font-size: 1.2rem;
+            margin-bottom: 6px;
+        }
+
+        .floating-card span {
+            color: var(--muted);
+            font-size: 0.82rem;
+        }
+
+        .section-header {
+            max-width: 720px;
+            margin: 0 auto 48px;
+            text-align: center;
+        }
+
+        .section-header p {
+            color: var(--muted);
+            margin-top: 14px;
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+
+        .section-title {
+            position: relative;
+            display: inline-block;
+            margin: 0 auto;
+            font-size: clamp(2rem, 3vw, 3.1rem);
+            font-weight: 800;
+            letter-spacing: -0.05em;
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            left: 50%;
+            bottom: -12px;
+            transform: translateX(-50%);
+            width: 86px;
+            height: 6px;
+            border-radius: 999px;
+            background: linear-gradient(90deg, var(--primary), #ffcf70);
+        }
+
+        .about {
+            background: rgba(255, 255, 255, 0.34);
+        }
+
+        .about-panel {
+            background: rgba(255, 255, 255, 0.82);
+            border: 1px solid var(--line);
+            box-shadow: 0 20px 40px rgba(31, 34, 48, 0.05);
+            border-radius: 32px;
+            padding: 28px;
+        }
+
+        .about-image {
+            overflow: hidden;
+            border-radius: 32px;
+            box-shadow: var(--shadow);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            min-height: 530px;
+            object-fit: cover;
+        }
+
+        .about-copy h3 {
+            font-size: clamp(2rem, 2.1vw, 2.7rem);
+            line-height: 1.2;
+            font-weight: 700;
+            margin-bottom: 18px;
+            letter-spacing: -0.05em;
+        }
+
+        .about-copy p {
+            color: var(--muted);
+            line-height: 1.9;
+            font-size: 1.02rem;
+        }
+
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 18px;
+            margin-top: 28px;
+        }
+
+        .stat-box {
+            background: linear-gradient(180deg, #fff, #fffaf7);
+            border: 1px solid var(--line);
+            border-radius: 22px;
+            padding: 26px 18px;
+            text-align: center;
+            box-shadow: 0 16px 28px rgba(31, 34, 48, 0.04);
+        }
+
+        .stat-box strong {
+            display: block;
+            font-size: clamp(1.8rem, 2.2vw, 2.5rem);
+            color: var(--primary-dark);
+            font-weight: 800;
+        }
+
+        .stat-box span {
+            color: var(--muted);
+            font-size: 0.93rem;
+        }
+
+        .services {
+            background: linear-gradient(180deg, rgba(223, 247, 216, 0.42), rgba(255, 255, 255, 0.2));
+        }
+
+        .service-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 26px;
+        }
+
+        .service-card {
+            height: 100%;
+            padding: 30px 24px;
+            background: rgba(255, 255, 255, 0.8);
+            border: 1px solid rgba(31, 34, 48, 0.06);
+            border-radius: 26px;
+            box-shadow: 0 18px 32px rgba(31, 34, 48, 0.05);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 22px 42px rgba(31, 34, 48, 0.1);
+        }
+
+        .service-icon {
+            width: 62px;
+            height: 62px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 18px;
+            font-size: 1.6rem;
+            margin-bottom: 18px;
+            background: linear-gradient(135deg, rgba(255, 93, 162, 0.12), rgba(255, 215, 106, 0.25));
+        }
+
+        .service-card h4 {
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+        }
+
+        .service-card p {
+            color: var(--muted);
+            line-height: 1.8;
+            margin: 0;
+        }
+
+        .service-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            color: var(--muted);
+        }
+
+        .service-list li {
+            position: relative;
+            padding: 9px 0 9px 26px;
+            border-bottom: 1px solid var(--line);
+        }
+
+        .service-list li:last-child {
+            border-bottom: none;
+        }
+
+        .service-list li::before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .projects {
+            background: rgba(255, 255, 255, 0.25);
+        }
+
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 26px;
+        }
+
+        .project-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 28px;
+            box-shadow: 0 20px 38px rgba(31, 34, 48, 0.08);
+            min-height: 360px;
+        }
+
+        .project-card img {
+            width: 100%;
+            height: 100%;
+            min-height: 360px;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .project-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .project-overlay {
+            position: absolute;
+            inset: auto 0 0 0;
+            padding: 22px 22px 18px;
+            background: linear-gradient(180deg, transparent, rgba(17, 19, 25, 0.84));
+        }
+
+        .project-overlay h5 {
+            margin: 0;
+            color: #fff;
+            font-size: 1.35rem;
+            font-weight: 600;
+        }
+
+        .project-overlay small {
+            display: inline-block;
+            margin-top: 6px;
+            color: rgba(255, 255, 255, 0.75);
+            font-size: 0.8rem;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+
+        .contact {
+            background: linear-gradient(135deg, rgba(231, 216, 255, 0.7), rgba(255, 255, 255, 0.4));
+        }
+
+        .contact-wrap {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1px solid rgba(31, 34, 48, 0.06);
+            border-radius: 30px;
+            box-shadow: 0 20px 42px rgba(31, 34, 48, 0.05);
+            padding: 28px;
+        }
+
+        .contact-copy h3 {
+            font-size: clamp(2rem, 2.3vw, 2.8rem);
+            font-weight: 700;
+            margin-bottom: 18px;
+            letter-spacing: -0.04em;
+        }
+
+        .contact-copy p {
+            color: var(--muted);
+            line-height: 1.8;
+            margin-bottom: 22px;
+        }
+
+        .contact-list {
+            display: grid;
+            gap: 12px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: var(--text);
+            font-weight: 500;
+        }
+
+        .contact-item span {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 93, 162, 0.08);
+            border-radius: 12px;
+            color: var(--primary-dark);
+            font-weight: 700;
+        }
+
+        .contact-form {
+            background: #fff;
+            border: 1px solid rgba(31, 34, 48, 0.06);
+            border-radius: 24px;
+            padding: 22px;
+        }
+
+        .form-control {
+            height: 54px;
+            border: 1px solid rgba(31, 34, 48, 0.12);
+            border-radius: 14px;
+            padding: 14px 16px;
+            box-shadow: none;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+            background: rgba(246, 247, 249, 0.55);
+        }
+
+        .form-control:focus {
+            border-color: rgba(255, 93, 162, 0.6);
+            box-shadow: 0 0 0 0.25rem rgba(255, 93, 162, 0.12);
+            background: #fff;
+        }
+
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        footer {
+            background: #171a22;
+            color: rgba(255, 255, 255, 0.8);
+            text-align: center;
+            padding: 22px 16px;
+            font-size: 0.95rem;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(28px);
+            transition: opacity 0.7s ease, transform 0.7s ease;
+        }
+
+        .reveal.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-18px); }
+        }
+
+        @keyframes drift {
+            0% { transform: translateY(0px); }
+            100% { transform: translateY(-10px); }
+        }
+
+        @media (max-width: 991.98px) {
+            .hero {
+                padding-top: 90px;
+            }
+
+            .showcase-card {
+                margin: 26px auto 0;
+            }
+
+            .service-grid,
+            .project-grid,
+            .stat-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (max-width: 767.98px) {
+            .service-grid,
+            .project-grid,
+            .stat-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+
+            .contact-wrap,
+            .about-panel {
+                padding: 20px;
+            }
+
+            .showcase-card img {
+                height: 500px;
+            }
+
+            .card-one,
+            .card-two {
+                position: static;
+                margin-top: 16px;
+                width: 100%;
+            }
+
+            .floating-card {
+                display: block;
+                margin-bottom: 12px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="#home"><span class="brand-mark">N</span>Nova Studio</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="mainNav">
+                <ul class="navbar-nav ms-auto align-items-lg-center">
+                    <li class="nav-item"><a class="nav-link" href="#home">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#services">Services</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <section class="hero" id="home">
+        <div class="container">
+            <div class="row align-items-center g-5">
+                <div class="col-lg-6">
+                    <span class="badge-pill reveal">👋 Hello, I’m Nova</span>
+                    <h1 class="reveal">Creative design that feels <span>alive.</span></h1>
+                    <p class="reveal">We transform bold ideas into elegant brands, websites, and digital experiences that turn attention into action and help businesses grow in a crowded market.</p>
+
+                    <div class="hero-actions reveal">
+                        <a class="btn btn-primary" href="#contact">Start Project</a>
+                        <a class="btn btn-outline" href="#projects">View Work</a>
+                    </div>
+
+                    <ul class="hero-metrics reveal">
+                        <li>
+                            <strong>120+</strong>
+                            <span>Projects</span>
+                        </li>
+                        <li>
+                            <strong>80+</strong>
+                            <span>Clients</span>
+                        </li>
+                        <li>
+                            <strong>5Y</strong>
+                            <span>Experience</span>
+                        </li>
+                    </ul>
+                </div>
+
+                <div class="col-lg-6">
+                    <div class="showcase-card reveal">
+                        <div class="mini-badge">Featured project</div>
+                        <img src="https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=900&q=80" alt="Creative workspace featuring design mockups">
+
+                        <div class="floating-card card-one">
+                            <strong>+38%</strong>
+                            <span>Engagement boost</span>
+                        </div>
+
+                        <div class="floating-card card-two">
+                            <strong>UI/UX</strong>
+                            <span>Modern digital systems</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section about" id="about">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">About Us</h2>
+                <p>We blend strategy, storytelling, and design to help brands look exceptional and feel memorable across every digital touchpoint.</p>
+            </div>
+
+            <div class="row align-items-center g-4">
+                <div class="col-lg-6 reveal">
+                    <div class="about-image">
+                        <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=1200&q=80" alt="Creative team in office">
+                    </div>
+                </div>
+
+                <div class="col-lg-6 reveal">
+                    <div class="about-panel">
+                        <div class="about-copy">
+                            <h3>Creative agency with a modern vision.</h3>
+                            <p>From branding and web design to thoughtful product experiences, we build ideas that are as smart as they are beautiful. Every detail is designed to create trust, clarity, and conversion.</p>
+                            <p>Our team partners with ambitious founders, startups, and growing brands who want a digital presence that stands out with confidence.</p>
+                        </div>
+
+                        <div class="stat-grid">
+                            <div class="stat-box">
+                                <strong>120+</strong>
+                                <span>Projects</span>
+                            </div>
+                            <div class="stat-box">
+                                <strong>80+</strong>
+                                <span>Clients</span>
+                            </div>
+                            <div class="stat-box">
+                                <strong>5+</strong>
+                                <span>Years</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section services" id="services">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Our Services</h2>
+                <p>From visual identity to presentation and marketing materials, we create thoughtful design that helps every brand stand out.</p>
+            </div>
+
+            <div class="service-grid">
+                <div class="service-card reveal">
+                    <div class="service-icon">🎨</div>
+                    <h4>Creative Design Services 1</h4>
+                    <ul class="service-list">
+                        <li>Canva Design</li>
+                        <li>Graphic Design</li>
+                        <li>Presentation Design</li>
+                        <li>PowerPoint Design</li>
+                        <li>Visual Design</li>
+                        <li>Social Media Design</li>
+                        <li>Business Card Design</li>
+                        <li>Invitation Design</li>
+                        <li>Brand Identity Design</li>
+                        <li>Layout Design</li>
+                    </ul>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">✦</div>
+                    <h4>Creative Design Services 2</h4>
+                    <ul class="service-list">
+                        <li>Logo Design</li>
+                        <li>Poster Design</li>
+                        <li>Flyer Design</li>
+                        <li>Resume Design</li>
+                        <li>Marketing Materials Design</li>
+                        <li>Typography</li>
+                        <li>Creative Design</li>
+                    </ul>
+                </div>
+
+                <div class="service-card reveal">
+                    <div class="service-icon">🖋️</div>
+                    <h4>Creative Design Services 3</h4>
+                    <ul class="service-list">
+                        <li>Graphic Design</li>
+                        <li>Visual Design</li>
+                        <li>PowerPoint Design</li>
+                        <li>Layout Design</li>
+                        <li>Business Card Design</li>
+                        <li>Resume Design</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section projects" id="projects">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Our Projects</h2>
+                <p>Selected work from brands and businesses that wanted thoughtful design and a stronger digital presence.</p>
+            </div>
+
+            <div class="project-grid">
+                <div class="project-card reveal">
+                    <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=900&q=80" alt="E-commerce platform design">
+                    <div class="project-overlay">
+                        <small>Branding</small>
+                        <h5>E-commerce Website</h5>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <img src="https://images.unsplash.com/photo-1455390582262-044cdead277a?auto=format&fit=crop&w=900&q=80" alt="Identity design project">
+                    <div class="project-overlay">
+                        <small>Identity</small>
+                        <h5>Brand Identity</h5>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <img src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?auto=format&fit=crop&w=900&q=80" alt="Portfolio website for creative designer">
+                    <div class="project-overlay">
+                        <small>Portfolio</small>
+                        <h5>Portfolio Design</h5>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <img src="https://images.unsplash.com/photo-1522202176988-66273c2fd55f?auto=format&fit=crop&w=900&q=80" alt="Startup presentation design project">
+                    <div class="project-overlay">
+                        <small>Pitch Deck</small>
+                        <h5>Startup Presentation</h5>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <img src="https://images.unsplash.com/photo-1552664730-d307ca884978?auto=format&fit=crop&w=900&q=80" alt="Marketing campaign design project">
+                    <div class="project-overlay">
+                        <small>Campaign</small>
+                        <h5>Marketing Bundle</h5>
+                    </div>
+                </div>
+
+                <div class="project-card reveal">
+                    <img src="https://images.unsplash.com/photo-1516321318423-f06f85e504b3?auto=format&fit=crop&w=900&q=80" alt="Creative agency workspace project">
+                    <div class="project-overlay">
+                        <small>Studio</small>
+                        <h5>Creative Campaign</h5>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section contact" id="contact">
+        <div class="container">
+            <div class="section-header reveal">
+                <h2 class="section-title">Contact Us</h2>
+                <p>Let’s create something impactful together — tell us what you need and we’ll help shape the right direction.</p>
+            </div>
+
+            <div class="contact-wrap reveal">
+                <div class="row g-4 align-items-center">
+                    <div class="col-lg-6">
+                        <div class="contact-copy">
+                            <h3>Let’s build something amazing.</h3>
+                            <p>Whether you need a rebrand, a landing page, or a more polished digital experience, we’re ready to design your next big move.</p>
+
+                            <div class="contact-list">
+                                <div class="contact-item"><span>✉</span> hello@novastudio.com</div>
+                                <div class="contact-item"><span>☎</span> +1 (555) 234-7890</div>
+                                <div class="contact-item"><span>⌂</span> 124 Creative Avenue, New York</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="col-lg-6">
+                        <form class="contact-form">
+                            <div class="mb-3">
+                                <input type="text" class="form-control" placeholder="Your Name">
+                            </div>
+                            <div class="mb-3">
+                                <input type="email" class="form-control" placeholder="Email Address">
+                            </div>
+                            <div class="mb-3">
+                                <textarea class="form-control" placeholder="Your Message"></textarea>
+                            </div>
+                            <button type="submit" class="btn btn-primary w-100">Send Message</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        © 2026 Nova Studio | All Rights Reserved
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const revealItems = document.querySelectorAll('.reveal');
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.15 });
+
+        revealItems.forEach((item) => observer.observe(item));
+    </script>
+</body>
+
+</html>
